@@ -1,32 +1,29 @@
-HEADERS = \
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+CONFIG += QHexEdit
+LIBS += -L$$[QT_INSTALL_PLUGINS]/designer -lQHexEdit
+
+HEADERS += \
     mainwindow.h \
     optionsdialog.h \
-    ../src/qhexedit.h \
-    ../src/qhexedit_p.h \
-    ../src/xbytearray.h \
-    ../src/commands.h \
     searchdialog.h
 
 
-SOURCES = \
+SOURCES += \
     main.cpp \
     mainwindow.cpp \
     optionsdialog.cpp \
-    ../src/qhexedit.cpp \
-    ../src/qhexedit_p.cpp \
-    ../src/xbytearray.cpp \
-    ../src/commands.cpp \
     searchdialog.cpp
 
-RESOURCES = \
+RESOURCES += \
     qhexedit.qrc
 
 FORMS += \
     optionsdialog.ui \
-    searchdialog.ui
-
-OTHER_FILES += \
     ../doc/release.txt
+    searchdialog.ui
 
 TRANSLATIONS += \
     translations/qhexedit_cs.ts \

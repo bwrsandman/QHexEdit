@@ -1,8 +1,12 @@
 #ifndef QHEXEDIT_H
 #define QHEXEDIT_H
 
-#include <QtGui>
+#include <QScrollArea>
+
 #include "qhexedit_p.h"
+
+class QHBoxLayout;
+class QHexEditPrivate;
 
 /** \mainpage
 QHexEdit is a binary editor widget for Qt.
@@ -44,7 +48,7 @@ This widget can only handle small amounts of data. The size has to be below 10
 megabytes, otherwise the scroll sliders ard not shown and you can't scroll any
 more.
 */
-        class QHexEdit : public QScrollArea
+class QHexEdit : public QScrollArea
 {
     Q_OBJECT
     /*! Property data holds the content of QHexEdit. Call setData() to set the

@@ -1,7 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "../src/qhexedit.h"
+#include <QMainWindow>
+#include <QHexEdit>
+//#include "../src/QHexEdit"
+
 #include "optionsdialog.h"
 #include "searchdialog.h"
 
@@ -9,6 +12,7 @@ QT_BEGIN_NAMESPACE
 class QAction;
 class QMenu;
 class QUndoStack;
+class QLabel;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow

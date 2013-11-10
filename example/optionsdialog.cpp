@@ -1,3 +1,6 @@
+#include <QColorDialog>
+#include <QFontDialog>
+
 #include "optionsdialog.h"
 #include "ui_optionsdialog.h"
 

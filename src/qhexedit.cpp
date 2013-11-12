@@ -1,3 +1,5 @@
+#include <QResizeEvent>
+
 #include "qhexedit.h"
 
 
@@ -176,4 +178,10 @@ void QHexEdit::setFont(const QFont &font)
 const QFont & QHexEdit::font() const
 {
     return qHexEdit_p->font();
+}
+
+void QHexEdit::resizeEvent(QResizeEvent *event)
+{
+    qHexEdit_p->resize(event->size());
+    QScrollArea::resizeEvent(event);
 }

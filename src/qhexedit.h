@@ -162,6 +162,8 @@ public:
     */
     QString selectionToReadableString();
 
+    void resizeEvent(QResizeEvent *event);
+
     /*! \cond docNever */
     void setAddressOffset(int offset);
     int addressOffset();

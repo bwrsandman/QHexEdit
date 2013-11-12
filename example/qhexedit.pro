@@ -22,7 +22,6 @@ RESOURCES += \
 
 FORMS += \
     optionsdialog.ui \
-    ../doc/release.txt
     searchdialog.ui
 
 TRANSLATIONS += \

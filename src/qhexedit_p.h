@@ -60,6 +60,8 @@ public:
     void undo();
     void redo();
 
+    void resize(const QSize&);
+
     QString toRedableString();
     QString selectionToReadableString();
 
@@ -83,6 +85,7 @@ protected:
     void setSelection(int pos);         // set min (if below init) or max (if greater init)
     int getSelectionBegin();
     int getSelectionEnd();
+    int getHexCharsInLine() const;
 
 
 private slots:
@@ -119,6 +122,8 @@ private:
     int _selectionInit;                     // That's, where we pressed the mouse button
 
     int _size;
+
+    int _bytes_per_line;
 };
 
 /** \endcond docNever */

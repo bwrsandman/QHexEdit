@@ -19,13 +19,13 @@ This widget can only handle small amounts of data. The size has to be below 10 m
 Demonstration
 -------------
 
-A simple demo of the widget is provided in ./demo
+A simple demo of the widget is provided in `./demo`.
 
 Using it in a project
 ---------------------
 
-Include src/qhexedit_widget.pri in the QMake project file. 
-All the required files are in ./src
+Include `src/qhexedit_widget.pri` in the QMake project file. 
+All the required files are in `./src`
 
 To preserve the git history, please use `git filter-branch --subdirectory-filter`:
 ```bash
@@ -42,9 +42,9 @@ git pull "${PathTo}"/QHexEdit
 Installing as a Qt Designer/Creator Plugin
 ------------------------------------------
 
-The sources for the designer plugin are in ./designer_plugin
+The sources for the designer plugin are in `./designer_plugin`
 
-Compile the library and install in (Qt SDK)/(Qt Version)/(Toolchain)/plugins/designer
+Compile the library and install in `(Qt SDK)/(Qt Version)/(Toolchain)/plugins/designer`
 ```bash
 cd designer_plugin
 qmake -Wall

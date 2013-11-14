@@ -1,5 +1,5 @@
-#ifndef QHEXEDITPLUGIN_H
-#define QHEXEDITPLUGIN_H
+#ifndef QHEXEDIT_PLUGIN_H
+#define QHEXEDIT_PLUGIN_H
 
 #include <QDesignerCustomWidgetInterface>
 

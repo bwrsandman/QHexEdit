@@ -2,8 +2,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += QHexEdit
-LIBS += -L$$[QT_INSTALL_PLUGINS]/designer -lQHexEdit
+TARGET = QHexEditor
+TEMPLATE = app
 
 HEADERS += \
     mainwindow.h \
@@ -27,3 +27,5 @@ FORMS += \
 TRANSLATIONS += \
     translations/qhexedit_cs.ts \
     translations/qhexedit_de.ts
+
+include(../src/qhexedit_widget.pri)

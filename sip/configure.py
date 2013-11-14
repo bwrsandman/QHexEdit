@@ -1,3 +1,4 @@
+#!/usr/bin/env python2
 import os
 import sipconfig
 from PyQt4 import pyqtconfig
@@ -17,13 +18,13 @@ qt_sip_flags = config.pyqt_sip_flags
 # Run SIP to generate the code.  Note that we tell SIP where to find the qt
 # module's specification files using the -I flag.
 os.system(" ".join([config.sip_bin, "-c", ".", "-b", build_file, "-I",
-config.pyqt_sip_dir, qt_sip_flags, "../sip/qhexedit.sip"]))
+config.pyqt_sip_dir, qt_sip_flags, "sip/qhexedit.sip"]))
 
 # We are going to install the SIP specification file for this module and
 # its configuration module.
 installs = []
 
-installs.append(["../sip/qhexedit.sip", os.path.join(config.default_sip_dir,
+installs.append(["sip/qhexedit.sip", os.path.join(config.default_sip_dir,
 "qhexedit")])
 
 # Create the Makefile.  The QtModuleMakefile class provided by the
@@ -39,7 +40,7 @@ makefile = pyqtconfig.QtGuiModuleMakefile(
 # specific prefixes or extensions (e.g. the "lib" prefix on UNIX, or the
 # ".dll" extension on Windows).
 makefile.LFLAGS.append("-L../c++")
-makefile.extra_libs = ["qhexedit"]
+makefile.extra_libs = ["QHexEdit"]
 
 # Generate the Makefile itself.
 makefile.generate()

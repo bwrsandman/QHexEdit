@@ -6,7 +6,7 @@
 class QHexEdit : QScrollArea
 {
 %TypeHeaderCode
-#include "../src/qhexedit.h"
+#include "src/QHexEdit"
 %End
 
 public:

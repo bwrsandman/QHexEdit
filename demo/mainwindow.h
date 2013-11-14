@@ -12,6 +12,9 @@ class QAction;
 class QMenu;
 class QUndoStack;
 class QLabel;
+namespace Ui {
+    class MainWindow;
+}
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -20,6 +23,8 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
+    ~MainWindow();
+    Ui::MainWindow *ui;
 
 protected:
     void closeEvent(QCloseEvent *event);
@@ -41,10 +46,8 @@ private slots:
 
 private:
     void init();
-    void createActions();
-    void createMenus();
+    void connectActions();
     void createStatusBar();
-    void createToolBars();
     void loadFile(const QString &fileName);
     void readSettings();
     bool saveFile(const QString &fileName);
@@ -54,31 +57,7 @@ private:
 
     QString curFile;
     bool isUntitled;
-    
-    QMenu *fileMenu;
-    QMenu *editMenu;
-    QMenu *helpMenu;
 
-    QToolBar *fileToolBar;
-
-    QAction *openAct;
-    QAction *saveAct;
-    QAction *saveAsAct;
-    QAction *saveReadable;
-    QAction *closeAct;
-    QAction *exitAct;
-
-    QAction *undoAct;
-    QAction *redoAct;
-    QAction *saveSelectionReadable;
-
-    QAction *aboutAct;
-    QAction *aboutQtAct;
-    QAction *optionsAct;
-    QAction *findAct;
-    QAction *findNextAct;
-
-    QHexEdit *hexEdit;
     OptionsDialog *optionsDialog;
     SearchDialog *searchDialog;
     QLabel *lbAddress, *lbAddressName;

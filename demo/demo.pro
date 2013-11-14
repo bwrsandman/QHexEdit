@@ -22,7 +22,8 @@ RESOURCES += \
 
 FORMS += \
     optionsdialog.ui \
-    searchdialog.ui
+    searchdialog.ui \
+    mainwindow.ui
 
 TRANSLATIONS += \
     translations/qhexedit_cs.ts \

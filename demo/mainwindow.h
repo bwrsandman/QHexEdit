@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QHexEdit>
-//#include "../src/QHexEdit"
 
 #include "optionsdialog.h"
 #include "searchdialog.h"

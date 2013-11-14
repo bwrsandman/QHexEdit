@@ -4,7 +4,6 @@
 #include <QDialog>
 #include <QtCore>
 #include <QHexEdit>
-//#include "../src/QHexEdit"
 
 namespace Ui {
     class SearchDialog;

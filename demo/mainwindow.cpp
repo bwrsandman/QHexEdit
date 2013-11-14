@@ -16,12 +16,15 @@
 /*****************************************************************************/
 /* Public methods */
 /*****************************************************************************/
-MainWindow::MainWindow():
+MainWindow::MainWindow(const char* const fileName):
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     init();
-    setCurrentFile("");
+    setCurrentFile(fileName);
+    if (!curFile.isEmpty()) {
+        loadFile(curFile);
+    }
 }
 
 MainWindow::~MainWindow()

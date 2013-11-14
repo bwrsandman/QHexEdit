@@ -15,8 +15,12 @@ int main(int argc, char *argv[])
     translator.load(QString("qhexedit_") + locale);
     app.installTranslator(&translator);
 
-    MainWindow *mainWin = new MainWindow;
+    MainWindow *mainWin = new MainWindow(argc > 1? argv[1]: "");
     mainWin->show();
+
+//    QPixmap p(mainWin->size());
+//    mainWin->render(&p);
+//    p.save("screenshot.png");
 
     return app.exec();
 }

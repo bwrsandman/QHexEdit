@@ -2,8 +2,8 @@ CONFIG      += plugin debug_and_release
 TARGET      = $$qtLibraryTarget(QHexEdit)
 TEMPLATE    = lib
 
-HEADERS     = qhexeditplugin.h
-SOURCES     = qhexeditplugin.cpp
+HEADERS     = qhexedit_plugin.h
+SOURCES     = qhexedit_plugin.cpp
 RESOURCES   = icons.qrc
 LIBS        += -L. 
 
@@ -13,7 +13,7 @@ greaterThan(QT_MAJOR_VERSION, 4) {
     CONFIG += designer
 }
 
+include(../src/qhexedit_widget.pri)
+
 target.path = $$[QT_INSTALL_PLUGINS]/designer
 INSTALLS    += target
-
-include(qhexedit.pri)

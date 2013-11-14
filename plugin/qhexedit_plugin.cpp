@@ -1,5 +1,5 @@
 #include "qhexedit.h"
-#include "qhexeditplugin.h"
+#include "qhexedit_plugin.h"
 
 #include <QtPlugin>
 

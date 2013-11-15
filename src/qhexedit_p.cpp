@@ -296,6 +296,8 @@ void QHexEditPrivate::undo()
 void QHexEditPrivate::resize(const QSize& size)
 {
     _bytes_per_line = (size.width() - GAP_ADR_HEX - GAP_HEX_ASCII)/(_charWidth * 4) - 1;
+    if (_bytes_per_line < 1)
+        _bytes_per_line = 1;
     adjust();
 }
 

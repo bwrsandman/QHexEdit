@@ -27,7 +27,6 @@ QHexEditPrivate::QHexEditPrivate(QScrollArea *parent) :
     setHighlightingColor(QColor(0xff, 0xff, 0x99, 0xff));
     setSelectionColor(QColor(0x6d, 0x9e, 0xff, 0xff));
     setFont(QFont("Courier", 10));
-
     resetSelection(0);
 
     setFocusPolicy(Qt::StrongFocus);
@@ -707,7 +706,7 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
     }
 
     // paint cursor
-    if (_blink && !_readOnly && hasFocus())
+    if (_blink && !_readOnly && hasFocus() && _size)
     {
         if (_overwriteMode)
         {
@@ -831,7 +830,7 @@ int QHexEditPrivate::getSelectionEnd()
 
 void QHexEditPrivate::updateCursor()
 {
-    if (_blink)
+    if (_blink || !_size)
         _blink = false;
     else
         _blink = true;

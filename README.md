@@ -21,6 +21,8 @@ Demonstration
 
 A simple demo of the widget is provided in `./demo`.
 
+![Screenshot of QHexEdit Widget](https://raw.github.com/bwrsandman/QHexEdit/master/demo/screenshot.png)
+
 Using it in a project
 ---------------------
 

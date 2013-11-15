@@ -691,16 +691,11 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
                 }
             }
             // render hex value
-            if (colIdx == 0)
-            {
-                hex = hexBa.mid((lineIdx - firstLineIdx) * 2, 2);
-                painter.drawText(xPos, yPos, hex);
-                xPos += 2 * _charWidth;
-            } else {
-                hex = hexBa.mid((lineIdx + colIdx - firstLineIdx) * 2, 2).prepend(" ");
-                painter.drawText(xPos, yPos, hex);
-                xPos += 3 * _charWidth;
-            }
+            hex = hexBa.mid((lineIdx + colIdx - firstLineIdx) * 2, 2);
+            if ((getSelectionBegin() <= posBa) && (getSelectionEnd() - 1 > posBa))
+                hex.append(" ");
+            painter.drawText(xPos, yPos, hex);
+            xPos += 3 * _charWidth;
 
             // render ascii value
             if (_asciiArea)

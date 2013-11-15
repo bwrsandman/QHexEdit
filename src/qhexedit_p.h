@@ -113,7 +113,7 @@ private:
     bool _readOnly;                         // true: the user can only look and navigate
 
     int _charWidth, _charHeight;            // char dimensions (dpendend on font)
-    int _cursorX, _cursorY;                 // graphics position of the cursor
+    int _cursorX, _cursorY, _cursorXAscii;  // graphics position of the cursor
     int _cursorPosition;                    // character positioin in stream (on byte ends in to steps)
     int _xPosAdr, _xPosHex, _xPosAscii;     // graphics x-position of the areas
 

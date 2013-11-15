@@ -656,11 +656,13 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
     QPen colStandard = QPen(this->palette().color(QPalette::WindowText));
 
     painter.setBackgroundMode(Qt::TransparentMode);
+    painter.setPen(this->palette().color(QPalette::WindowText));
 
     for (int lineIdx = firstLineIdx, yPos = yPosStart; lineIdx < lastLineIdx; lineIdx += _bytes_per_line, yPos +=_charHeight)
     {
         QByteArray hex;
         int xPos = _xPosHex;
+        int xPosAscii = _xPosAscii;
         for (int colIdx = 0; ((lineIdx + colIdx) < _xData.size() and (colIdx < _bytes_per_line)); colIdx++)
         {
             int posBa = lineIdx + colIdx;
@@ -688,7 +690,6 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
                     }
                 }
             }
-
             // render hex value
             if (colIdx == 0)
             {
@@ -701,18 +702,8 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
                 xPos += 3 * _charWidth;
             }
 
-        }
-    }
-    painter.setBackgroundMode(Qt::TransparentMode);
-    painter.setPen(this->palette().color(QPalette::WindowText));
-
-    // paint ascii area
-    if (_asciiArea)
-    {
-        for (int lineIdx = firstLineIdx, yPos = yPosStart; lineIdx < lastLineIdx; lineIdx += _bytes_per_line, yPos +=_charHeight)
-        {
-            int xPosAscii = _xPosAscii;
-            for (int colIdx = 0; ((lineIdx + colIdx) < _xData.size() and (colIdx < _bytes_per_line)); colIdx++)
+            // render ascii value
+            if (_asciiArea)
             {
                 painter.drawText(xPosAscii, yPos, _xData.asciiChar(lineIdx + colIdx));
                 xPosAscii += _charWidth;
@@ -724,9 +715,15 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
     if (_blink && !_readOnly && hasFocus())
     {
         if (_overwriteMode)
+        {
             painter.fillRect(_cursorX, _cursorY + _charHeight - 2, _charWidth, 2, this->palette().color(QPalette::WindowText));
+            painter.fillRect(_cursorXAscii, _cursorY + _charHeight - 2, _charWidth, 2, this->palette().color(QPalette::WindowText));
+        }
         else
+        {
             painter.fillRect(_cursorX, _cursorY, 2, _charHeight, this->palette().color(QPalette::WindowText));
+            painter.fillRect(_cursorXAscii, _cursorY, 2, _charHeight, this->palette().color(QPalette::WindowText));
+        }
     }
 
     if (_size != _xData.size())
@@ -758,8 +755,9 @@ void QHexEditPrivate::setCursorPos(int position)
     // calc position
     _cursorPosition = position;
     _cursorY = (position / (2 * _bytes_per_line)) * _charHeight + 4;
-    int x = (position % (2 * _bytes_per_line));
+    int x = position % (2 * _bytes_per_line);
     _cursorX = (((x / 2) * 3) + (x % 2)) * _charWidth + _xPosHex;
+    _cursorXAscii = x / 2 * _charWidth + _xPosAscii;
 
     // immiadately draw cursor
     _blink = true;
@@ -769,19 +767,22 @@ void QHexEditPrivate::setCursorPos(int position)
 
 int QHexEditPrivate::cursorPos(QPoint pos)
 {
-    int result = -1;
     // find char under cursor
-    if ((pos.x() >= _xPosHex) and (pos.x() < (_xPosHex + getHexCharsInLine() * _charWidth)))
+    int x = 0, y = (pos.y() - 3) / _charHeight;
+    // Ascii area
+    if (pos.x() >= (_xPosHex + getHexCharsInLine() * _charWidth))
     {
-        int x = (pos.x() - _xPosHex) / _charWidth;
-        if ((x % 3) == 0)
-            x = (x / 3) * 2;
-        else
-            x = ((x / 3) * 2) + 1;
-        int y = ((pos.y() - 3) / _charHeight) * 2 * _bytes_per_line;
-        result = x + y;
+        x = 2 * (pos.x() - _xPosAscii) / _charWidth;
     }
-    return result;
+    // Hex area
+    else if (pos.x() >= _xPosHex)
+    {
+        x = (pos.x() - _xPosHex) / _charWidth;
+        x = (x / 3) * 2;
+        if ((x % 3) != 0)
+            ++x;
+    }
+    return x + y * 2 * _bytes_per_line;
 }
 
 int QHexEditPrivate::cursorPos()
@@ -840,6 +841,7 @@ void QHexEditPrivate::updateCursor()
     else
         _blink = true;
     update(_cursorX, _cursorY, _charWidth, _charHeight);
+    update(_cursorXAscii, _cursorY, _charWidth, _charHeight);
 }
 
 void QHexEditPrivate::adjust()

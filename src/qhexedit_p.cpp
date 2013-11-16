@@ -859,7 +859,7 @@ void QHexEditPrivate::adjust()
     else
         setMinimumWidth(_xPosHex + getHexCharsInLine() * _charWidth);
 
-    update();
+    setCursorPos(_cursorPosition);
 }
 
 void QHexEditPrivate::ensureVisible()

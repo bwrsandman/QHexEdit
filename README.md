@@ -30,9 +30,13 @@ Include `src/qhexedit_widget.pri` in the QMake project file.
 
 All the required files are in `./src`.
 
-To preserve the git history, please use `git filter-branch --subdirectory-filter`:
+To preserve the git history, please use `git submodule` or `git filter-branch --subdirectory-filter`:
 ```bash
-git clone https://github.com/bwrsandman/QHexEdit.git
+git submodule add git://github.com/bwrsandman/QHexEdit.git
+```
+or
+```bash
+git clone git://github.com/bwrsandman/QHexEdit.git
 cd QHexEdit
 git filter-branch --subdirectory-filter src -- --all
 mkdir QHexEditWidget

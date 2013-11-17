@@ -643,13 +643,13 @@ void QHexEditPrivate::paintEvent(QPaintEvent *event)
         for (int lineIdx = firstLineIdx, yPos = yPosStart; lineIdx < lastLineIdx; lineIdx += _bytes_per_line, yPos +=_charHeight)
         {
             QString address = QString("%1")
-                              .arg(lineIdx + _xData.addressOffset(), _xData.realAddressNumbers(), 16, QChar('0'));
+                              .arg(lineIdx + _xData.addressOffset(), _xData.realAddressNumbers(), 16, QChar('0')).toUpper();
             painter.drawText(_xPosAdr, yPos, address);
         }
     }
 
     // paint hex area
-    QByteArray hexBa(_xData.data().mid(firstLineIdx, lastLineIdx - firstLineIdx + 1).toHex());
+    QByteArray hexBa(_xData.data().mid(firstLineIdx, lastLineIdx - firstLineIdx + 1).toHex().toUpper());
     QBrush highLighted = QBrush(_highlightingColor);
     QPen colHighlighted = QPen(this->palette().color(QPalette::WindowText));
     QBrush selected = QBrush(_selectionColor);

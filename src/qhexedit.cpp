@@ -109,6 +109,13 @@ int QHexEdit::cursorPosition()
     return qHexEdit_p->cursorPos() / 2;
 }
 
+void QHexEdit::setSelection(int start, int end)
+{
+    qHexEdit_p->resetSelection(start * 2);
+    qHexEdit_p->setSelection(end * 2);
+    qHexEdit_p->setCursorPos(end * 2);
+}
+
 
 void QHexEdit::setData(const QByteArray &data)
 {

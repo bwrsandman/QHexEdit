@@ -169,6 +169,7 @@ public:
     int addressOffset();
     void setCursorPosition(int cusorPos);
     int cursorPosition();
+    void setSelection(int start, int end);
     void setData(QByteArray const &data);
     QByteArray data();
     void setAddressAreaColor(QColor const &color);

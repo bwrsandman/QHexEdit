@@ -25,6 +25,12 @@ public:
     void setCursorPos(int position);
     int cursorPos();
 
+    void resetSelection(int pos);       // set selectionStart and selectionEnd to pos
+    void resetSelection();              // set selectionEnd to selectionStart
+    void setSelection(int pos);         // set min (if below init) or max (if greater init)
+    int getSelectionBegin() const;
+    int getSelectionEnd() const;
+
     void setData(QByteArray const &data);
     QByteArray data();
 
@@ -78,13 +84,8 @@ protected:
 
     void paintEvent(QPaintEvent *event);
 
-    int cursorPos(QPoint pos);          // calc cursorpos from graphics position. DOES NOT STORE POSITION
+    int cursorPos(QPoint pos) const;          // calc cursorpos from graphics position. DOES NOT STORE POSITION
 
-    void resetSelection(int pos);       // set selectionStart and selectionEnd to pos
-    void resetSelection();              // set selectionEnd to selectionStart
-    void setSelection(int pos);         // set min (if below init) or max (if greater init)
-    int getSelectionBegin();
-    int getSelectionEnd();
     int getHexCharsInLine() const;
 
 

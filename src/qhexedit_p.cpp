@@ -761,7 +761,7 @@ void QHexEditPrivate::setCursorPos(int position)
     emit currentAddressChanged(_cursorPosition/2);
 }
 
-int QHexEditPrivate::cursorPos(QPoint pos)
+int QHexEditPrivate::cursorPos(QPoint pos) const
 {
     // find char under cursor
     int x = 0, y = (pos.y() - 3) / _charHeight;
@@ -819,12 +819,12 @@ void QHexEditPrivate::setSelection(int pos)
     }
 }
 
-int QHexEditPrivate::getSelectionBegin()
+int QHexEditPrivate::getSelectionBegin() const
 {
     return _selectionBegin;
 }
 
-int QHexEditPrivate::getSelectionEnd()
+int QHexEditPrivate::getSelectionEnd() const
 {
     return _selectionEnd;
 }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from PyQt4 import QtCore, QtGui
-from qhexedit import QHexEdit
+from QHexEdit import QHexEdit
 
 from optionsdialog import OptionsDialog
 from searchdialog import SearchDialog
@@ -14,7 +14,7 @@ class MainWindow(QtGui.QMainWindow):
         super(MainWindow, self).__init__()
         self.init()
         self.setCurrentFile('')
-        
+
     def about(self):
         QtGui.QMessageBox.about(self, "About HexEdit",
             "The HexEdit example is a short Demo of the QHexEdit Widget.");
@@ -36,30 +36,30 @@ class MainWindow(QtGui.QMainWindow):
         self.saveAsAct = QtGui.QAction("Save &As...", self,
                 shortcut=QtGui.QKeySequence.SaveAs,
                 statusTip="Save the document under a new name", triggered=self.saveAs)
-        
+
         self.saveReadable = QtGui.QAction("Save as &Readable...", self,
                 statusTip="Save in a readable format", triggered=self.saveToReadableFile)
 
         self.exitAct = QtGui.QAction("E&xit", self, shortcut="Ctrl+Q",
                 statusTip="Exit the application", triggered=self.close)
-        
+
         self.undoAct = QtGui.QAction("&Undo", self, shortcut=QtGui.QKeySequence.Undo,
                 triggered=self.hexEdit.undo)
-                
+
         self.redoAct = QtGui.QAction("&Redo", self, shortcut=QtGui.QKeySequence.Redo,
                 triggered=self.hexEdit.redo)
-        
+
         self.saveSelectionReadable = QtGui.QAction("Save Selection Readable...", self,
                 statusTip="Save selection in a readable format",
                 triggered=self.saveSelectionToReadableFile)
-        
+
         self.aboutAct = QtGui.QAction("&About", self,
                 statusTip="Show the application's About box", triggered=self.about)
-                
+
         self.findAct = QtGui.QAction("&Find/Replace", self, shortcut=QtGui.QKeySequence.Find,
                 statusTip="Show the Dialog for finding and replacing", triggered=self.showSearchDialog)
 
-        self.findNextAct = QtGui.QAction("Find &next", self, shortcut=QtGui.QKeySequence.FindNext, 
+        self.findNextAct = QtGui.QAction("Find &next", self, shortcut=QtGui.QKeySequence.FindNext,
                 statusTip="Find next occurrence of the searched pattern", triggered=self.findNext)
 
         self.optionsAct = QtGui.QAction("&Options", self,
@@ -73,7 +73,7 @@ class MainWindow(QtGui.QMainWindow):
         self.fileMenu.addAction(self.saveReadable)
         self.fileMenu.addSeparator()
         self.fileMenu.addAction(self.exitAct)
-        
+
         self.editMenu = self.menuBar().addMenu("&Edit")
         self.editMenu.addAction(self.undoAct)
         self.editMenu.addAction(self.redoAct)
@@ -83,10 +83,10 @@ class MainWindow(QtGui.QMainWindow):
         self.editMenu.addAction(self.findNextAct)
         self.editMenu.addSeparator()
         self.editMenu.addAction(self.optionsAct)
-        
+
         self.helpMenu = self.menuBar().addMenu("&Help")
         self.helpMenu.addAction(self.aboutAct)
-        
+
     def createStatusBar(self):
         # Address Label
         self.lbAddressName = QtGui.QLabel()
@@ -98,7 +98,7 @@ class MainWindow(QtGui.QMainWindow):
         self.lbAddress.setMinimumWidth(70)
         self.statusBar().addPermanentWidget(self.lbAddress)
         self.hexEdit.currentAddressChanged.connect(self.setAddress)
-        
+
         # Address Size
         self.lbSizeName = QtGui.QLabel()
         self.lbSizeName.setText("Size:")
@@ -109,7 +109,7 @@ class MainWindow(QtGui.QMainWindow):
         self.lbSize.setMinimumWidth(70)
         self.statusBar().addPermanentWidget(self.lbSize)
         self.hexEdit.currentSizeChanged.connect(self.setSize)
-        
+
         # Overwrite Mode label
         self.lbOverwriteModeName = QtGui.QLabel()
         self.lbOverwriteModeName.setText("Mode:")
@@ -122,7 +122,7 @@ class MainWindow(QtGui.QMainWindow):
         self.setOverwriteMode(self.hexEdit.overwriteMode())
 
         self.statusBar().showMessage("Ready")
-        
+
     def createToolBars(self):
         self.fileToolBar = self.addToolBar("File")
         self.fileToolBar.addAction(self.openAct)
@@ -131,7 +131,7 @@ class MainWindow(QtGui.QMainWindow):
     def init(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.isUntitled = True
-        
+
         self.hexEdit = QHexEdit()
         self.setCentralWidget(self.hexEdit)
         self.hexEdit.overwriteModeChanged.connect(self.setOverwriteMode)
@@ -139,7 +139,7 @@ class MainWindow(QtGui.QMainWindow):
         self.optionsDialog = OptionsDialog(self)
         self.optionsDialog.accepted.connect(self.optionsAccepted)
         self.searchDialog = SearchDialog(self, self.hexEdit)
-        
+
         self.createActions()
         self.createMenus()
         self.createToolBars()
@@ -169,7 +169,7 @@ class MainWindow(QtGui.QMainWindow):
     def optionsAccepted(self):
         self.writeSettings()
         self.readSettings()
-        
+
     def findNext(self):
         self.searchDialog.findNext()
 
@@ -179,7 +179,7 @@ class MainWindow(QtGui.QMainWindow):
         size = settings.value('size', QtCore.QSize(610, 460)).toSize()
         self.move(pos)
         self.resize(size)
-        
+
         self.hexEdit.setAddressArea(settings.value("AddressArea").toBool())
         self.hexEdit.setAsciiArea(settings.value("AsciiArea").toBool());
         self.hexEdit.setHighlighting(settings.value("Highlighting").toBool());
@@ -207,22 +207,22 @@ class MainWindow(QtGui.QMainWindow):
 
     def showOptionsDialog(self):
         self.optionsDialog.show()
-        
+
     def showSearchDialog(self):
         self.searchDialog.show()
-        
+
     def setAddress(self, address):
         self.lbAddress.setText('%x' % address)
-        
+
     def setOverwriteMode(self, mode):
         if mode:
             self.lbOverwriteMode.setText("Overwrite")
         else:
             self.lbOverwriteMode.setText("Insert")
-            
+
     def setSize(self, size):
         self.lbSize.setText('%d' % size)
-            
+
     def saveFile(self, fileName):
         file = QtCore.QFile(fileName)
         if not file.open( QtCore.QFile.WriteOnly | QtCore.QFile.Text):
@@ -235,7 +235,7 @@ class MainWindow(QtGui.QMainWindow):
         self.setCurrentFile(fileName)
         self.statusBar().showMessage("File saved", 2000)
         return True
-    
+
     def saveToReadableFile(self):
         fileName = QtGui.QFileDialog.getSaveFileName(self, "Save To Readable File")
         if not fileName.isEmpty():
@@ -263,7 +263,7 @@ class MainWindow(QtGui.QMainWindow):
         settings = QtCore.QSettings()
         settings.setValue('pos', self.pos())
         settings.setValue('size', self.size())
-        
+
 if __name__ == '__main__':
 
     import sys

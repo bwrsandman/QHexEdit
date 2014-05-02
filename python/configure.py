@@ -13,34 +13,37 @@ config = pyqtconfig.Configuration()
 # Get the extra SIP flags needed by the imported qt module.  Note that
 # this normally only includes those flags (-x and -t) that relate to SIP's
 # versioning system.
-qt_sip_flags = config.pyqt_sip_flags
+pyqt_sip_flags = config.pyqt_sip_flags
 
 # Run SIP to generate the code.  Note that we tell SIP where to find the qt
 # module's specification files using the -I flag.
-os.system(" ".join([config.sip_bin, "-c", ".", "-b", build_file, "-I",
-config.pyqt_sip_dir, qt_sip_flags, "sip/qhexedit.sip"]))
+cmd = " ".join([config.sip_bin, "-c", ".", "-b", build_file, "-I", config.pyqt_sip_dir, pyqt_sip_flags, "qhexedit.sip"])
+print("Executing: " + cmd)
+os.system(cmd)
 
 # We are going to install the SIP specification file for this module and
 # its configuration module.
 installs = []
 
-installs.append(["sip/qhexedit.sip", os.path.join(config.default_sip_dir,
-"qhexedit")])
+installs.append(["qhexedit.sip", os.path.join(config.default_sip_dir, "QHexEdit")])
 
 # Create the Makefile.  The QtModuleMakefile class provided by the
 # pyqtconfig module takes care of all the extra preprocessor, compiler and
 # linker flags needed by the Qt library.
 makefile = pyqtconfig.QtGuiModuleMakefile(
-     configuration=config,
-         build_file=build_file,
-         installs=installs
-     )
+    configuration=config,
+    debug=1,
+    build_file=build_file,
+    installs=installs,
+)
 
 # Add the library we are wrapping.  The name doesn't include any platform
 # specific prefixes or extensions (e.g. the "lib" prefix on UNIX, or the
 # ".dll" extension on Windows).
-makefile.LFLAGS.append("-L../c++")
-makefile.extra_libs = ["QHexEdit"]
+makefile.extra_libs = ["qhexedit"]
+
+makefile.LFLAGS.append("-L../src/build")
+makefile.CXXFLAGS.append("-I../src")
 
 # Generate the Makefile itself.
 makefile.generate()

@@ -13,3 +13,6 @@ SOURCES += \
     $$PWD/qhexedit_p.cpp \
     $$PWD/commands.cpp \
     $$PWD/xbytearray.cpp
+
+CONFIG += qt
+QT += widgets

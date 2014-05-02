@@ -1,4 +1,4 @@
-%Module qhexedit 0
+%Module QHexEdit 0
 
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
@@ -6,7 +6,7 @@
 class QHexEdit : QScrollArea
 {
 %TypeHeaderCode
-#include "src/QHexEdit"
+#include <QHexEdit>
 %End
 
 public:
@@ -30,16 +30,17 @@ public:
     void setReadOnly(bool);
     bool isReadOnly();
     void setFont(const QFont &);
-    QFont font();
+    const QFont &font() const;
 
-    int indexOf(QByteArray &, int);
+    int indexOf(QByteArray &, int) const;
     void insert(int, QByteArray &);
     void insert(int, char);
-    int lastIndexOf(QByteArray &, int);
+    int lastIndexOf(QByteArray &, int) const;
     void remove(int, int);
-    void replace(int, int, QByteArray &);
+    void replace(int, int, const QByteArray &);
     QString toReadableString();
     QString selectionToReadableString();
+    void resizeEvent(QResizeEvent *);
 
 public slots:
     void redo();

@@ -2,7 +2,9 @@
 
 %Import QtCore/QtCoremod.sip
 %Import QtGui/QtGuimod.sip
+%If (Qt_5_0_0 -)
 %Import QtWidgets/QtWidgetsmod.sip
+%End
 
 class QHexEdit : QScrollArea
 {

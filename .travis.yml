@@ -1,0 +1,12 @@
+language: cpp
+compiler:
+    - gcc
+before_install:
+    - sudo apt-get install -qq pyqt4-dev-tools
+script:
+    - ./python/setup.py install
+after_script:
+    - cd -
+    - python/test.py
+notifications:
+    email: false

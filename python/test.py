@@ -18,4 +18,3 @@ if __name__ == '__main__':
     layout.addWidget(qhexedit, 0, 0)
     widget.setLayout(layout)
     widget.show()
-    sys.exit(app.exec_())

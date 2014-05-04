@@ -2,9 +2,10 @@
 set -v
 
 # remove previous build
-rm -rf ../src/build
+./clean.sh
 
-# build in separate directory
+# build C++ library
+
 mkdir -p ../src/build
 pushd ../src/build
 
@@ -13,14 +14,13 @@ make
 
 popd
 
-# generate files
-python configure.py
+# build python bindings
 
-# compile
-make
+./setup.py build build_ext --library-dir=../src/build
+
 
 # test
+
 export PYTHONPATH=$PWD
 export LD_LIBRARY_PATH=$PWD/../src/build:$LD_LIBRARY_PATH
-#../test.py
-python -c "import QHexEdit"
+./test.py

@@ -8,7 +8,7 @@ sys.path.append(
 )
 
 from PyQt5.QtWidgets import QApplication, QWidget, QGridLayout
-from QHexEdit import QHexEdit
+from qhexedit import QHexEdit
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

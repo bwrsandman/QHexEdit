@@ -95,11 +95,11 @@ libraries = ["Qt5" + lib[2:] for lib in qt_libs]
 libraries.append("qhexedit")
 
 setup(
-    name='QHexEdit',
+    name='qhexedit',
     version='1.0',
     ext_modules=[
         Extension(
-            "QHexEdit",
+            "qhexedit",
             sources=[
                 "qhexedit.sip",
                 "../src/qhexedit.cpp" ,

@@ -169,6 +169,9 @@ public:
     int addressOffset();
     void setCursorPosition(int cusorPos);
     int cursorPosition();
+    int selectionStart();
+    int selectionEnd();
+    int selectionSize();
     void setSelection(int start, int end);
     void setData(QByteArray const &data);
     QByteArray data();

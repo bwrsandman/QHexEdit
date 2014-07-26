@@ -99,7 +99,7 @@ int QHexEdit::addressOffset()
 
 void QHexEdit::setCursorPosition(int cursorPos)
 {
-    // cursorPos in QHexEditPrivate is the position of the textcoursor without
+    // cursorPos in QHexEditPrivate is the position of the text cursor without
     // blanks, means bytePos*2
     qHexEdit_p->setCursorPos(cursorPos*2);
 }
@@ -107,6 +107,21 @@ void QHexEdit::setCursorPosition(int cursorPos)
 int QHexEdit::cursorPosition()
 {
     return qHexEdit_p->cursorPos() / 2;
+}
+
+int QHexEdit::selectionStart()
+{
+    return qHexEdit_p->getSelectionBegin();
+}
+
+int QHexEdit::selectionEnd()
+{
+    return qHexEdit_p->getSelectionEnd();
+}
+
+int QHexEdit::selectionSize()
+{
+    return selectionEnd() - selectionStart();
 }
 
 void QHexEdit::setSelection(int start, int end)

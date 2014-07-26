@@ -22,6 +22,9 @@ public:
     QColor addressAreaColor();
     void setCursorPosition(int);
     int cursorPosition();
+    int selectionStart();
+    int selectionEnd();
+    int selectionSize();
     void setSelection(int, int);
     void setHighlightingColor(const QColor &);
     QColor highlightingColor();

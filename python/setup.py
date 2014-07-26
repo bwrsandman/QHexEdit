@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
-from PyQt5.QtCore import PYQT_CONFIGURATION
 from distutils.core import setup, Extension
 from distutils import log
 
 import os
-import sys
 import subprocess
 import sipdistutils
 import sipconfig
@@ -34,9 +32,10 @@ class build_pyqt_ext(sipdistutils.build_ext):
         self.required = False
 
     def finalize_options(self):
+        from PyQt5.QtCore import PYQT_CONFIGURATION
         sipdistutils.build_ext.finalize_options(self)
         self.sip_opts = self.sip_opts + PYQT_CONFIGURATION['sip_flags'].split()
-        self.sip_opts.append('-I/usr/share/sip/PyQt5') # FIXME: un-hardcode this
+        self.sip_opts.append('-I/usr/share/sip/PyQt5')  # FIXME: un-hardcode this
         if self.required is not None:
             self.required = True
 
@@ -87,7 +86,7 @@ if cfg.qt_framework:
         include_dirs += [os.path.join(cfg.qt_lib_dir,
                                       lib + ".framework", "Headers")]
 else:
-    qt_inc_dir = '/usr/include/qt'  #FIXME: un-hardcode this
+    qt_inc_dir = '/usr/include/qt'  # FIXME: un-hardcode this
     include_dirs.append(qt_inc_dir)
     include_dirs += [os.path.join(qt_inc_dir, lib) for lib in qt_libs]
 
@@ -97,18 +96,19 @@ libraries.append("qhexedit")
 setup(
     name='qhexedit',
     version='1.0',
+    install_requires=['PyQt5', 'SIP'],
     ext_modules=[
         Extension(
             "qhexedit",
             sources=[
                 "qhexedit.sip",
-                "../src/qhexedit.cpp" ,
-                "../src/qhexedit_p.cpp" ,
+                "../src/qhexedit.cpp",
+                "../src/qhexedit_p.cpp",
                 "../src/xbytearray.cpp",
                 "../src/commands.cpp",
             ],
             include_dirs=include_dirs,
-            libraries = libraries,
+            libraries=libraries,
         )
     ],
     cmdclass={"build_ext": build_pyqt_ext},

@@ -13,7 +13,7 @@ cfg = sipconfig.Configuration()
 pyqt_sip_dir = cfg.default_sip_dir
 
 
-include_dirs = ['../src']
+include_dirs = ['src']
 
 
 class build_pyqt_ext(sipdistutils.build_ext):
@@ -86,26 +86,27 @@ if cfg.qt_framework:
         include_dirs += [os.path.join(cfg.qt_lib_dir,
                                       lib + ".framework", "Headers")]
 else:
-    qt_inc_dir = '/usr/include/qt'  # FIXME: un-hardcode this
-    include_dirs.append(qt_inc_dir)
-    include_dirs += [os.path.join(qt_inc_dir, lib) for lib in qt_libs]
+    for qt_inc_dir in ('/usr/include/qt', '/usr/include/qt5'):
+        include_dirs.append(qt_inc_dir)
+        include_dirs += [os.path.join(qt_inc_dir, lib) for lib in qt_libs]
 
 libraries = ["Qt5" + lib[2:] for lib in qt_libs]
 libraries.append("qhexedit")
 
+dirname = os.path.dirname(__file__)
+
 setup(
-    name='qhexedit',
+    name='QHexEdit',
     version='1.0',
-    install_requires=['PyQt5', 'SIP'],
     ext_modules=[
         Extension(
             "qhexedit",
             sources=[
-                "qhexedit.sip",
-                "../src/qhexedit.cpp",
-                "../src/qhexedit_p.cpp",
-                "../src/xbytearray.cpp",
-                "../src/commands.cpp",
+                os.path.join(dirname, "src/qhexedit.sip"),
+                os.path.join(dirname, "src/qhexedit.cpp"),
+                os.path.join(dirname, "src/qhexedit_p.cpp"),
+                os.path.join(dirname, "src/xbytearray.cpp"),
+                os.path.join(dirname, "src/commands.cpp"),
             ],
             include_dirs=include_dirs,
             libraries=libraries,

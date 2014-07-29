@@ -4,6 +4,7 @@ TEMPLATE = lib
 
 include(qhexedit_widget.pri)
 
+headers.files += $$HEADERS
 
 macx {
     CONFIG += lib_bundle
@@ -18,7 +19,8 @@ else:unix {
     isEmpty( PREFIX ):INSTALL_PREFIX = /usr
     else:INSTALL_PREFIX = $${PREFIX}
     target.path = $${INSTALL_PREFIX}/lib$${LIB_SUFFIX}
-    INSTALLS += target
+    headers.path = $${INSTALL_PREFIX}/include/QHexEdit
+    INSTALLS += target headers
 }
 else:win32 {
     DLLDESTDIR = $${DESTDIR}

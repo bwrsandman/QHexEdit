@@ -59,6 +59,14 @@ make
 make install # sudo or through your package manager
 ```
 
+Python
+------
+
+To build and install the python bindings simply run:
+```bash
+python setup.py install
+```
+
 Latest Version
 --------------
 

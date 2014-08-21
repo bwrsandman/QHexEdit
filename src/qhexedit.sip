@@ -29,6 +29,7 @@ public:
     void setHighlightingColor(const QColor &);
     QColor highlightingColor();
     void setSelectionColor(const QColor &);
+    void setHighlightedRange(int, int);
     QColor selectionColor();
     void setOverwriteMode(bool);
     bool overwriteMode();

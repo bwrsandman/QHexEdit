@@ -87,6 +87,17 @@ void QHexEdit::setHighlighting(bool mode)
     qHexEdit_p->setHighlighting(mode);
 }
 
+void QHexEdit::setHighlightedRange(int start, int end)
+{
+    if (start > end )
+    {
+        int tmp = end;
+        end = start;
+        start = tmp;
+    }
+    qHexEdit_p->setHighlightedRange(start, end);
+}
+
 void QHexEdit::setAddressOffset(int offset)
 {
     qHexEdit_p->setAddressOffset(offset);

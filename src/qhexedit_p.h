@@ -61,6 +61,7 @@ public:
     void setAddressWidth(int addressWidth);
     void setAsciiArea(bool asciiArea);
     void setHighlighting(bool mode);
+    void setHighlightedRange(int start, int end);
     virtual void setFont(const QFont &font);
 
     void undo();

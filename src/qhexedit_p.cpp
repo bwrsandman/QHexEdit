@@ -261,6 +261,12 @@ void QHexEditPrivate::setFont(const QFont &font)
     adjust();
 }
 
+void QHexEditPrivate::setHighlightedRange(int start, int end)
+{
+    _xData.setDataChanged(start, QByteArray(end - start, char(1)));
+    update();
+}
+
 void QHexEditPrivate::setHighlighting(bool mode)
 {
     _highlighting = mode;

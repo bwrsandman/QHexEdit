@@ -177,6 +177,7 @@ public:
     QByteArray data();
     void setAddressAreaColor(QColor const &color);
     QColor addressAreaColor();
+    void setHighlightedRange(int start, int end);
     void setHighlightingColor(QColor const &color);
     QColor highlightingColor();
     void setSelectionColor(QColor const &color);
